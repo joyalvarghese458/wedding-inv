@@ -157,7 +157,7 @@ export default function Home() {
                         </p>
 
                         <h1 className="mt-4 font-serif text-5xl sm:text-6xl md:text-7xl">
-                            Name <span className="text-[#caa06a]">♥</span> Name
+                            Ronaldo <span className="text-[#caa06a]">♥</span> Georgina
                         </h1>
 
                         <div className="mt-7 flex items-center justify-center gap-4 text-white/90">
@@ -169,7 +169,7 @@ export default function Home() {
                         <div className="mt-6 text-sm sm:text-base text-white/85 leading-relaxed">
                             <p>10:00 AM - 12:00 PM, January 25, 2026</p>
                             <p>Church / Venue, City, State</p>
-                            <p className="mt-2">Contact: +91XXXXXXXXXX</p>
+                            <p className="mt-2">Contact: +91 123456789</p>
                         </div>
                     </div>
                 </div>
@@ -257,19 +257,44 @@ export default function Home() {
                 </div>
             </Section>
 
+
             {/* When & Where */}
             <Section id="whenwhere" title="When & Where" subtitle="Event details">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {[
-                        { title: "Ceremony", time: "10:00 AM - 12:00 PM", place: "Church / Venue, City" },
-                        { title: "Reception", time: "12:00 PM - 4:00 PM", place: "Hall / Venue, City" },
+                        {
+                            title: "Ceremony",
+                            time: "10:00 AM - 12:00 PM",
+                            place: "Church / Venue, City",
+                            image:
+                                "https://irinjalakudadiocese.com/wp-content/uploads/2020/06/Kuttikadu-cr-1.jpg",
+                        },
+                        {
+                            title: "Reception",
+                            time: "12:00 PM - 4:00 PM",
+                            place: "Hall / Venue, City",
+                            image:
+                                "https://www.fbt.ae/assets/images/slider/celebrations/slid-2.jpg",
+                        },
                     ].map((card) => (
-                        <div key={card.title} className="rounded-2xl overflow-hidden bg-white shadow-sm">
-                            <div className="h-44 bg-[url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center" />
+                        <div
+                            key={card.title}
+                            className="rounded-2xl overflow-hidden bg-white shadow-sm"
+                        >
+                            {/* Image */}
+                            <div
+                                className="h-44 bg-cover bg-center"
+                                style={{ backgroundImage: `url(${card.image})` }}
+                            />
+
+                            {/* Content */}
                             <div className="p-6">
-                                <h3 className="font-serif text-3xl text-[#caa06a]">{card.title}</h3>
+                                <h3 className="font-serif text-3xl text-[#caa06a]">
+                                    {card.title}
+                                </h3>
                                 <p className="mt-2 text-black/60">{card.place}</p>
                                 <p className="mt-3 text-sm text-black/70">{card.time}</p>
+
                                 <button className="mt-5 rounded-full bg-[#caa06a] px-5 py-2 text-sm font-medium text-white hover:opacity-90">
                                     Location
                                 </button>
@@ -277,9 +302,8 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-
-
             </Section>
+
 
             {/* Wishes */}
             <Section id="wishes" title="Wishes" subtitle="Send your love">
