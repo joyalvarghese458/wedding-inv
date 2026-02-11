@@ -4,7 +4,7 @@ import Section from "../components/Section";
 import WishModal from "../components/WishModal";
 import WishesCarousel from "../components/WishesCarousel";
 import { supabase } from "../supabaseClient";
-import Countdown from "../components/temp";
+import Countdown from "../components/CountDownSec";
 
 function getFileExt(name = "") {
     const parts = name.split(".");
