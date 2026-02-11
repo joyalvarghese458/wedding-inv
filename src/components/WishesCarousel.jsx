@@ -20,7 +20,10 @@ export default function WishesCarousel({ wishes = [] }) {
             >
                 {wishes.map((w) => (
                     <SwiperSlide key={w.id}>
-                        <div style={{ backgroundColor: '#f8e8de' }} className="h-full rounded-2xl bg-white p-5 shadow-sm border border-black/5">
+                        <div
+                            style={{ backgroundColor: "#f8e8de" }}
+                            className="h-[220px] sm:h-[240px] rounded-2xl p-5 shadow-sm border border-black/5 flex flex-col"
+                        >
                             <div className="flex items-center justify-between gap-3">
                                 <div className="flex items-center gap-3">
                                     <div className="h-11 w-11 rounded-full overflow-hidden bg-black/5 flex items-center justify-center shrink-0">
@@ -48,11 +51,13 @@ export default function WishesCarousel({ wishes = [] }) {
                                 </div>
                             </div>
 
-                            <p className="mt-3 text-sm text-black/70 leading-relaxed">
+                            {/* message area fixed + scroll */}
+                            <p className="mt-3 text-sm text-black/70 leading-relaxed overflow-auto flex-1 pr-1">
                                 {w.wish}
                             </p>
                         </div>
                     </SwiperSlide>
+
                 ))}
             </Swiper>
 

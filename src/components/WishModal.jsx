@@ -4,9 +4,10 @@ export default function WishModal({ open, onClose, onSubmit }) {
     const [name, setName] = useState("");
     const [relation, setRelation] = useState("");
     const [wish, setWish] = useState("");
-    const [photoFile, setPhotoFile] = useState(null); // ✅ File
-    const [previewUrl, setPreviewUrl] = useState(""); // ✅ preview
+    const [photoFile, setPhotoFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState("");
     const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false); // ✅ loading
 
     const relationOptions = useMemo(
         () => [
@@ -25,6 +26,7 @@ export default function WishModal({ open, onClose, onSubmit }) {
     useEffect(() => {
         if (!open) return;
         setError("");
+        setIsSubmitting(false);
     }, [open]);
 
     useEffect(() => {
@@ -61,6 +63,7 @@ export default function WishModal({ open, onClose, onSubmit }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isSubmitting) return; // ✅ block double submit
         setError("");
 
         const n = name.trim();
@@ -73,19 +76,28 @@ export default function WishModal({ open, onClose, onSubmit }) {
         if (w.length < 5) return setError("Wish is too short. Please write a little more.");
         if (w.length > 300) return setError("Wish is too long. Max 300 characters.");
 
-        await onSubmit({
-            name: n,
-            relation: r,
-            wish: w,
-            photoFile, // ✅ send file to Home
-        });
+        try {
+            setIsSubmitting(true);
 
-        // clear after submit
-        setName("");
-        setRelation("");
-        setWish("");
-        setPhotoFile(null);
-        onClose();
+            await onSubmit({
+                name: n,
+                relation: r,
+                wish: w,
+                photoFile,
+            });
+
+            // clear after submit
+            setName("");
+            setRelation("");
+            setWish("");
+            setPhotoFile(null);
+            onClose();
+        } catch (err) {
+            console.error(err);
+            setError(err?.message || "Something went wrong. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -93,7 +105,12 @@ export default function WishModal({ open, onClose, onSubmit }) {
             <div className="w-full max-w-lg rounded-2xl bg-white shadow-lg overflow-hidden">
                 <div className="flex items-center justify-between px-5 py-4 border-b">
                     <h3 className="font-serif text-xl">Send your Wish</h3>
-                    <button className="text-black/50 hover:text-black" onClick={onClose} type="button">
+                    <button
+                        className="text-black/50 hover:text-black disabled:opacity-40"
+                        onClick={onClose}
+                        type="button"
+                        disabled={isSubmitting}
+                    >
                         ✕
                     </button>
                 </div>
@@ -111,7 +128,8 @@ export default function WishModal({ open, onClose, onSubmit }) {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Enter your name"
-                            className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-[#caa06a]/40"
+                            disabled={isSubmitting}
+                            className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-[#caa06a]/40 disabled:opacity-60"
                         />
                     </div>
 
@@ -120,7 +138,8 @@ export default function WishModal({ open, onClose, onSubmit }) {
                         <select
                             value={relation}
                             onChange={(e) => setRelation(e.target.value)}
-                            className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-[#caa06a]/40 bg-white"
+                            disabled={isSubmitting}
+                            className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-[#caa06a]/40 bg-white disabled:opacity-60"
                         >
                             <option value="">Select relation</option>
                             {relationOptions.map((opt) => (
@@ -131,7 +150,7 @@ export default function WishModal({ open, onClose, onSubmit }) {
                         </select>
                     </div>
 
-                    {/* ✅ Photo */}
+                    {/* Photo */}
                     <div>
                         <label className="text-sm font-medium text-black/70">Photo (optional)</label>
 
@@ -149,7 +168,8 @@ export default function WishModal({ open, onClose, onSubmit }) {
                                     type="file"
                                     accept="image/*"
                                     onChange={handlePhotoChange}
-                                    className="block w-full text-sm text-black/60
+                                    disabled={isSubmitting}
+                                    className="block w-full text-sm text-black/60 disabled:opacity-60
                     file:mr-3 file:rounded-lg file:border-0 file:bg-[#caa06a]/15
                     file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[#1f1f1f]
                     hover:file:bg-[#caa06a]/25"
@@ -167,7 +187,8 @@ export default function WishModal({ open, onClose, onSubmit }) {
                             placeholder="Write your wish…"
                             rows={4}
                             maxLength={300}
-                            className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-[#caa06a]/40 resize-none"
+                            disabled={isSubmitting}
+                            className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-[#caa06a]/40 resize-none disabled:opacity-60"
                         />
                         <div className="mt-1 text-xs text-black/40">{wish.trim().length}/300</div>
                     </div>
@@ -175,16 +196,19 @@ export default function WishModal({ open, onClose, onSubmit }) {
                     <div className="flex justify-end gap-3 pt-2">
                         <button
                             type="button"
-                            className="rounded-xl px-4 py-2 border border-black/10 hover:bg-black/5"
+                            className="rounded-xl px-4 py-2 border border-black/10 hover:bg-black/5 disabled:opacity-50"
                             onClick={onClose}
+                            disabled={isSubmitting}
                         >
                             Close
                         </button>
+
                         <button
                             type="submit"
-                            className="rounded-xl px-4 py-2 bg-[#caa06a] text-white font-semibold hover:opacity-90"
+                            disabled={isSubmitting}
+                            className="rounded-xl px-4 py-2 bg-[#caa06a] text-white font-semibold hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
                         >
-                            Send Wish
+                            {isSubmitting ? "Sending..." : "Send Wish"}
                         </button>
                     </div>
                 </form>
@@ -192,5 +216,3 @@ export default function WishModal({ open, onClose, onSubmit }) {
         </div>
     );
 }
-
-
