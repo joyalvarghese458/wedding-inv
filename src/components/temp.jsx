@@ -13,7 +13,7 @@ function TimeBox({ value, label }) {
     );
 }
 
-export default function Countdown({ targetDate }) {
+export default function CountDown({ targetDate }) {
     // targetDate example: "2026-01-25T10:00:00"
     const weddingDate = new Date(targetDate || "2026-01-25T10:00:00");
 
