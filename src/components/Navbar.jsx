@@ -35,7 +35,7 @@ export default function Navbar({ onOpenWishes }) {
                     onClick={() => scrollTo("home")}
                     className="text-left leading-tight"
                 >
-                    <div className="font-serif text-lg text-[#1f1f1f]">Your Names</div>
+                    <div className="font-serif text-lg text-[#1f1f1f]">Ronaldo & Georgina</div>
                     <div className="text-[11px] tracking-[0.25em] uppercase text-black/50">
                         Wedding Invitation
                     </div>

@@ -159,9 +159,8 @@ export default function Home() {
                         <h1 className="mt-4 font-serif text-5xl sm:text-6xl md:text-7xl">
                             Ronaldo <span className="text-[#caa06a]">♥</span> Georgina
                         </h1>
-
                         <div className="mt-7 flex items-center justify-center gap-4 text-white/90">
-                            <span className="text-sm">January</span>
+                            <span className="text-sm">April</span>
                             <span className="text-5xl font-bold">25</span>
                             <span className="text-sm">2026</span>
                         </div>
