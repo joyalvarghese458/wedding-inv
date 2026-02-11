@@ -4,6 +4,7 @@ import Section from "../components/Section";
 import WishModal from "../components/WishModal";
 import WishesCarousel from "../components/WishesCarousel";
 import { supabase } from "../supabaseClient";
+import Countdown from "../components/CountDown";
 
 function getFileExt(name = "") {
     const parts = name.split(".");
@@ -17,6 +18,8 @@ export default function Home() {
     const [loadingWishes, setLoadingWishes] = useState(true);
     const [savingWish, setSavingWish] = useState(false);
     const [wishesError, setWishesError] = useState("");
+    const [isVideoOpen, setIsVideoOpen] = useState(false);
+
 
     const sortedWishes = useMemo(() => {
         return [...wishes].sort((a, b) =>
@@ -201,26 +204,43 @@ export default function Home() {
                 </div>
             </Section>
 
-            {/* Countdown placeholder */}
-            <Section id="countdown" title="We’re getting married in" subtitle="We will become a family in">
-                <div className="rounded-2xl bg-white shadow-sm p-6 text-center">
-                    <p className="text-black/60">Next step: we will add a live countdown timer here.</p>
-                </div>
+            <Section
+                id="countdown"
+                title="We’re getting married in"
+                subtitle="We will become a family in"
+            >
+                <Countdown targetDate="2026-04-25T10:00:00" />
             </Section>
+
 
             {/* Video placeholder */}
             <Section id="video" title="Video" subtitle="Save the date">
                 <div className="rounded-2xl bg-white shadow-sm overflow-hidden">
-                    <div className="aspect-video bg-black/10 flex items-center justify-center">
-                        <button className="rounded-full bg-[#caa06a] px-6 py-3 text-white font-semibold hover:opacity-90">
+                    <div className="relative aspect-video bg-black/10 flex items-center justify-center">
+
+                        {/* Thumbnail Background */}
+                        <img
+                            src="https://t3.ftcdn.net/jpg/02/18/06/54/360_F_218065499_qIqGChM5CRvpnHjRwPulMJtWZee6LzR2.webp"
+                            alt="Wedding Video"
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+
+                        <div className="absolute inset-0 bg-black/40" />
+
+                        <button
+                            onClick={() => setIsVideoOpen(true)}
+                            className="relative z-10 rounded-full bg-[#caa06a] px-6 py-3 text-white font-semibold hover:opacity-90 shadow-lg"
+                        >
                             ▶ Play Video
                         </button>
                     </div>
-                    <div className="p-5 text-sm text-black/60">
-                        Next step: we will open a video modal (YouTube) like your reference site.
+
+                    <div className="p-5 text-sm text-black/60 text-center">
+                        Watch our special moment 💛
                     </div>
                 </div>
             </Section>
+
 
             {/* Gallery */}
             <Section id="gallery" title="Captured Moments" subtitle="Couple images">
@@ -258,6 +278,11 @@ export default function Home() {
                     ))}
                 </div>
 
+
+            </Section>
+
+            {/* Wishes */}
+            <Section id="wishes" title="Wishes" subtitle="Send your love">
                 <div className="mt-10 text-center">
                     <button
                         onClick={() => setIsWishesOpen(true)}
@@ -266,11 +291,7 @@ export default function Home() {
                         Send Wishes
                     </button>
                 </div>
-            </Section>
-
-            {/* Wishes */}
-            <Section id="wishes" title="Wishes" subtitle="Send your love">
-                <div className="flex items-center justify-between gap-3">
+                {/* <div className="flex items-center justify-between gap-3">
                     <p className="text-sm text-black/60">Messages from friends & family ❤️</p>
                     <button
                         onClick={() => setIsWishesOpen(true)}
@@ -278,7 +299,7 @@ export default function Home() {
                     >
                         {savingWish ? "Sending..." : "Send Wishes"}
                     </button>
-                </div>
+                </div> */}
 
                 {loadingWishes ? (
                     <div className="mt-6 rounded-2xl bg-white p-6 text-center text-black/60 shadow-sm">
@@ -308,6 +329,37 @@ export default function Home() {
                 onClose={() => setIsWishesOpen(false)}
                 onSubmit={handleSubmitWish}
             />
+
+            {/* Video Modal */}
+            {isVideoOpen && (
+                <div
+                    className="fixed inset-0 z-[70] bg-black/80 flex items-center justify-center p-4"
+                    onClick={() => setIsVideoOpen(false)}
+                >
+                    <div
+                        className="relative w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setIsVideoOpen(false)}
+                            className="absolute top-3 right-3 z-10 bg-white/20 text-white px-3 py-1 rounded-lg hover:bg-white/30"
+                        >
+                            ✕
+                        </button>
+
+                        <iframe
+                            className="w-full h-full"
+                            src="https://www.youtube-nocookie.com/embed/EfvwM4doq-w?autoplay=1&rel=0"
+                            title="Wedding Video"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        />
+
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }
