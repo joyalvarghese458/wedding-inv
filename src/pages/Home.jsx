@@ -5,6 +5,8 @@ import WishModal from "../components/WishModal";
 import WishesCarousel from "../components/WishesCarousel";
 import { supabase } from "../supabaseClient";
 import Countdown from "../components/CountDownSec";
+import joyal from "../assets/joyal.png"
+import babi from "../assets/babi.png"
 
 function getFileExt(name = "") {
     const parts = name.split(".");
@@ -179,12 +181,13 @@ export default function Home() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="rounded-2xl overflow-hidden bg-white shadow-sm">
                         <img
-                            className="h-80 w-full object-cover"
-                            src="https://cdn.shopify.com/s/files/1/0584/9438/6218/files/janetdphotography_034_480x480.jpg?v=1718811222"
+                            className="h-80 w-full object-cover object-top"
+                            // src="https://cdn.shopify.com/s/files/1/0584/9438/6218/files/janetdphotography_034_480x480.jpg?v=1718811222"
+                            src={joyal}
                             alt="Groom"
                         />
                         <div className="p-5">
-                            <h3 className="font-serif text-2xl">Groom Name</h3>
+                            <h3 className="font-serif text-2xl">Ronaldo</h3>
                             <p className="mt-1 text-sm text-black/60">GROOM</p>
                         </div>
                     </div>
@@ -192,11 +195,12 @@ export default function Home() {
                     <div className="rounded-2xl overflow-hidden bg-white shadow-sm">
                         <img
                             className="h-80 w-full object-cover"
-                            src="https://i.pinimg.com/1200x/2a/36/ab/2a36ab25a1fe3220f81095b763df6597.jpg"
+                            // src="https://i.pinimg.com/1200x/2a/36/ab/2a36ab25a1fe3220f81095b763df6597.jpg"
+                            src={babi}
                             alt="Bride"
                         />
                         <div className="p-5">
-                            <h3 className="font-serif text-2xl">Bride Name</h3>
+                            <h3 className="font-serif text-2xl">Georgina</h3>
                             <p className="mt-1 text-sm text-black/60">BRIDE</p>
                         </div>
                     </div>
