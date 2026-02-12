@@ -182,7 +182,7 @@ export default function Home() {
                     <div className="rounded-2xl overflow-hidden bg-white shadow-sm">
                         <img
                             className="h-80 w-full object-cover object-top"
-                            src="https://m.media-amazon.com/images/I/41iEFRMwcsL._AC_UF894,1000_QL80_.jpg"
+                            src="https://i.pinimg.com/1200x/f7/4e/84/f74e847bba909afb246e6567489117b6.jpg"
                             // src={joyal}
                             alt="Groom"
                         />
