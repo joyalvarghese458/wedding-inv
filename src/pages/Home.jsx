@@ -182,8 +182,8 @@ export default function Home() {
                     <div className="rounded-2xl overflow-hidden bg-white shadow-sm">
                         <img
                             className="h-80 w-full object-cover object-top"
-                            // src="https://cdn.shopify.com/s/files/1/0584/9438/6218/files/janetdphotography_034_480x480.jpg?v=1718811222"
-                            src={joyal}
+                            src="https://m.media-amazon.com/images/I/41iEFRMwcsL._AC_UF894,1000_QL80_.jpg"
+                            // src={joyal}
                             alt="Groom"
                         />
                         <div className="p-5">
@@ -195,8 +195,8 @@ export default function Home() {
                     <div className="rounded-2xl overflow-hidden bg-white shadow-sm">
                         <img
                             className="h-80 w-full object-cover object-top"
-                            // src="https://i.pinimg.com/1200x/2a/36/ab/2a36ab25a1fe3220f81095b763df6597.jpg"
-                            src={babi}
+                            src="https://awsimages.detik.net.id/community/media/visual/2024/09/04/georgina-rodriguez-5.jpeg?w=600&q=90"
+                            // src={babi}
                             alt="Bride"
                         />
                         <div className="p-5">
