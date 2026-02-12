@@ -194,7 +194,7 @@ export default function Home() {
 
                     <div className="rounded-2xl overflow-hidden bg-white shadow-sm">
                         <img
-                            className="h-80 w-full object-cover"
+                            className="h-80 w-full object-cover object-top"
                             // src="https://i.pinimg.com/1200x/2a/36/ab/2a36ab25a1fe3220f81095b763df6597.jpg"
                             src={babi}
                             alt="Bride"
