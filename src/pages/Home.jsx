@@ -223,9 +223,9 @@ export default function Home() {
 
                         {/* Thumbnail Background */}
                         <img
-                            src="https://t3.ftcdn.net/jpg/02/18/06/54/360_F_218065499_qIqGChM5CRvpnHjRwPulMJtWZee6LzR2.webp"
+                            src="https://images.ladbible.com/resize?type=webp&quality=70&width=3840&fit=contain&gravity=auto&url=https://images.ladbiblegroup.com/v3/assets/blt8bbf16c2d7a209e5/blt066b8cff2410049a/689b6391766b57cd95775800/Screenshot_2025-08-12_at_16.53.35.png"
                             alt="Wedding Video"
-                            className="absolute inset-0 w-full h-full object-cover"
+                            className="absolute inset-0 w-full h-full object-cover object-top"
                         />
 
                         <div className="absolute inset-0 bg-black/40" />
@@ -246,7 +246,7 @@ export default function Home() {
 
 
             {/* Gallery */}
-            <Section id="gallery" title="Captured Moments" subtitle="Couple images">
+            {/* <Section id="gallery" title="Captured Moments" subtitle="Couple images">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     {Array.from({ length: 8 }).map((_, i) => (
                         <div key={i} className="aspect-[3/4] rounded-2xl overflow-hidden bg-white shadow-sm">
@@ -258,7 +258,34 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
+            </Section> */}
+
+            <Section id="gallery" title="Captured Moments" subtitle="Couple images">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    {[
+                        "https://www.theglobeandmail.com/resizer/v2/77BBTQW3BJBIVNYLZS7XGG227I.jpg?auth=4a93c67f95b169337cd2cf9290d124f4284a455c8991fdeb1ddf3528be111c20&width=600&quality=80",
+                        "https://imgengine.khaleejtimes.com/khaleejtimes-english/2025-08-12/4hkyzek0/ron-geo3.jpg?width=600&height=400&format=auto",
+                        "https://i.dailymail.co.uk/1s/2025/01/27/16/94565935-14330429-image-a-2_1737995949209.jpg",
+                        "https://static.toiimg.com/photo/77703576.cms?imgsize=119023",
+                        "https://i.pinimg.com/236x/51/18/6a/51186a476ec78bd9459437c0576dd206.jpg",
+                        "https://images.mid-day.com/images/images/2020/feb/7/georgi-ronny-a_l.jpg",
+                        "https://hollywoodlife.com/wp-content/uploads/2017/07/cristiano-ronaldo-and-georgina-shutterstock-5.jpg?w=680",
+                        "https://www.thesun.co.uk/wp-content/uploads/2019/01/NINTCHDBPICT000464752839.jpg",
+                    ].map((img, i) => (
+                        <div
+                            key={i}
+                            className="aspect-[3/4] rounded-2xl overflow-hidden bg-white shadow-sm"
+                        >
+                            <img
+                                className="h-full w-full object-cover"
+                                src={img}
+                                alt={`Gallery ${i + 1}`}
+                            />
+                        </div>
+                    ))}
+                </div>
             </Section>
+
 
 
             {/* When & Where */}
